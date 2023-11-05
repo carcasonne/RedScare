@@ -1,13 +1,12 @@
 # Red Scare! data format
 
-
 Every input file is of the following form:
 
 ```
-	n m r
-	s t
-	<vertices>
-	<edges>
+    n m r
+    s t
+    <vertices>
+    <edges>
 ```
 
 The integer `n` is the number of vertices.
@@ -19,14 +18,14 @@ The names of vertices in R are followed by “` *`”.
 
 `<edges>` is a list of edges of the form
 
-````
+```
 u -- v
-````
+```
 
 for the undirected edge between *u* and *v*, or
 
-````
+```
 u -> v
-````
+```
 
 for the directed arc from *u* to *v*.

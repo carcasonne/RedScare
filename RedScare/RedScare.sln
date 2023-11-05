@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedScare", "RedScare\RedScare.csproj", "{681ECAA5-59F7-4E02-BA36-F3252D3918CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedScare", "RedScare\RedScare.csproj", "{681ECAA5-59F7-4E02-BA36-F3252D3918CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{23D0A5D0-6547-4A68-94AE-EAC120C4B17A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{30C85D1D-17EA-41AC-9BC0-D27EDC6EE0CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{681ECAA5-59F7-4E02-BA36-F3252D3918CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{681ECAA5-59F7-4E02-BA36-F3252D3918CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{681ECAA5-59F7-4E02-BA36-F3252D3918CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23D0A5D0-6547-4A68-94AE-EAC120C4B17A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23D0A5D0-6547-4A68-94AE-EAC120C4B17A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23D0A5D0-6547-4A68-94AE-EAC120C4B17A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23D0A5D0-6547-4A68-94AE-EAC120C4B17A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30C85D1D-17EA-41AC-9BC0-D27EDC6EE0CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30C85D1D-17EA-41AC-9BC0-D27EDC6EE0CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30C85D1D-17EA-41AC-9BC0-D27EDC6EE0CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30C85D1D-17EA-41AC-9BC0-D27EDC6EE0CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
