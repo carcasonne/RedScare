@@ -14,7 +14,7 @@ public class GraphParser
     {
         var directory = GetDataDirectory();
 
-        StreamReader sr = new StreamReader($"{directory}\\{filename}");
+        StreamReader sr = new StreamReader($"{directory}/{filename}");
         var firstLine = sr.ReadLine()!.Split(' ').Select(Int32.Parse).ToList();
         var secondLine = sr.ReadLine()!.Split(' ').ToList();
         int n = firstLine[0];
@@ -29,7 +29,7 @@ public class GraphParser
         // Add all vertices
         for(int i = 0; i < n; i++)
         {
-            var line = sr.ReadLine()!.Split(' ').ToList();
+            var line = sr.ReadLine()!.Trim().Split(' ').ToList();
             var name = line[0];
             var isRed = line.Count > 1; // No need to explictly match the '*'
             var id = graph.AddVertex(name, isRed);
@@ -63,7 +63,7 @@ public class GraphParser
             var parent = Directory.GetParent(directory)!;
             directory = parent.FullName;
         }
-        var dataDirectory = $"{directory}\\Data";
+        var dataDirectory = $"{directory}/Data";
         return dataDirectory;
     }
 }

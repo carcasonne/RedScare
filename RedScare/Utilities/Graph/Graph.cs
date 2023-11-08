@@ -49,14 +49,17 @@ public class Graph
     var explored = new bool[V];
     var parent = new int[V];
 
-    queue.Enqueue(graph.Vertices[graph.Source]);
+    for (int i = 0; i < V; i++)
+        parent[i] = -1;
+
+    queue.Enqueue(Vertices[Source]);
     while(queue.Count > 0)
     {
         var vertex = queue.Dequeue();
         foreach(var edge in vertex.Edges)
         {
-            var neighbor = graph.Vertices[edge.To];
-            var nIsRed = graph.Reds.Contains(neighbor);
+            var neighbor = Vertices[edge.To];
+            var nIsRed = Reds.Contains(neighbor);
 
             if (!explored[neighbor.Id] && !nIsRed)
             {
@@ -66,7 +69,7 @@ public class Graph
             }
         }
     }
-    if(parent[Source] == 0)
+    if(parent[Target] == -1)
     {
         return -1;
     }
