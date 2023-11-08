@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Graph\Extensions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Graph\Extensions\" />
+  </ItemGroup>
 </Project>
