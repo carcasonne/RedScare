@@ -66,7 +66,10 @@ public class Graph
             }
         }
     }
-
+    if(parent[Source] == 0)
+    {
+        return -1;
+    }
     var temp = parent[Target];
     var pathLength = 1;
 

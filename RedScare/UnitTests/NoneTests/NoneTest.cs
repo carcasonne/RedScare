@@ -9,9 +9,11 @@ public class NoneTests
     [Fact]
     public void Graph_Without_Path_Finds_No_Path()
     {
-        var expeceted = false;
+        var expected = 0;
 
         var graph = GraphParser.ParseGraph("commoon-1-20.txt");
-        var actual = graph.
+        var actual = graph.BreadthFirstSearchAvoidingRed();
+
+        Assert.Equal(expected, actual);
     }
 }
