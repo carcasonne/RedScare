@@ -22,6 +22,8 @@ public class Edge
 
     public Edge(int id, int from, int to)
     {
-
+        this.Id = id;
+        this.From = from;
+        this.To = to;
     }
 }
