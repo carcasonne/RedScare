@@ -12,11 +12,12 @@ public class Graph
     public List<Vertex> Vertices { get; set; } = new List<Vertex>();
     public List<Vertex> Reds { get; set; } = new List<Vertex>();
     public List<Edge> Edges { get; set; } = new List<Edge>();
-    public ISet<GraphTypes> GraphTypes { get; set; } = new HashSet<GraphTypes>();
+    public ISet<GraphTypes> Properties { get; set; } = new HashSet<GraphTypes>();
     public int Source {  get; set; }
     public int Target { get; set; }
     public int V => Vertices.Count;
     public int E => Edges.Count;
+    public bool IsType(GraphTypes type) => Properties.Contains(type);
 
     public int AddVertex(string name, bool isRed)
     {
@@ -30,60 +31,21 @@ public class Graph
         return id;
     }
 
-    // Currently this assumes a directed graph
-    // Can be made undirected by also adding a reverse edge to the to node
     public int AddEdge(int from, int to)
     {
         var id = E;
         var edge = new Edge(id, from, to);
         Edges.Add(edge);
         Vertices[from].Edges.Add(edge);
+        
+        // IF undirected, allow traversel in the other direction
+        if(IsType(GraphTypes.Undirected))
+        {
+            var reverseEdge = new Edge(id + 1, to, from);
+            Edges.Add(reverseEdge);
+            Vertices[to].Edges.Add(reverseEdge);
+        }
 
         return id;
     }
-
-
-  public int BreadthFirstSearchAvoidingRed() 
-  {
-    var queue = new Queue<Vertex>();
-    var explored = new bool[V];
-    var parent = new int[V];
-
-    for (int i = 0; i < V; i++)
-        parent[i] = -1;
-
-    queue.Enqueue(Vertices[Source]);
-    while(queue.Count > 0)
-    {
-        var vertex = queue.Dequeue();
-        foreach(var edge in vertex.Edges)
-        {
-            var neighbor = Vertices[edge.To];
-            var nIsRed = Reds.Contains(neighbor);
-
-            if (!explored[neighbor.Id] && !nIsRed)
-            {
-                explored[neighbor.Id] = true;
-                parent[neighbor.Id] = vertex.Id;
-                queue.Enqueue(neighbor);
-            }
-        }
-    }
-    if(parent[Target] == -1)
-    {
-        return -1;
-    }
-    var temp = parent[Target];
-    var pathLength = 1;
-
-    while (temp != Source)
-    {
-        pathLength++;
-        temp = parent[temp];
-    }
-
-    return pathLength;
-  }
-
-
 }

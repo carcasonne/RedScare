@@ -6,25 +6,13 @@ namespace UnitTests.NoneTests;
 
 public class NoneTests
 {
-    [Fact]
-    public void Graph_Without_Path_Finds_No_Path()
+    [Theory]
+    [InlineData("common-1-20.txt", -1)]
+    [InlineData("ski-illustration.txt", 8)]
+    public void Graph_FileName_Finds_Correct_Path_Length(string filename, int expected)
     {
-        var expected = -1;
-
-        var graph = GraphParser.ParseGraph("common-1-20.txt");
-        var actual = graph.BreadthFirstSearchAvoidingRed();
-
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void Graph_Ski_Illustration_Finds_Path_Size_8()
-    {
-        var expected = 8;
-
-        var graph = GraphParser.ParseGraph("ski-illustration.txt");
-        var actual = graph.BreadthFirstSearchAvoidingRed();
-
+        var graph = GraphParser.ParseGraph(filename, true);
+        var actual = None.ShortestPathWithoutReds(graph);
         Assert.Equal(expected, actual);
     }
 }

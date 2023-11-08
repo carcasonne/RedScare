@@ -23,6 +23,7 @@ public static class Alternate
             parent[i] = -1;
 
         queue.Enqueue(graph.Vertices[graph.Source]);
+		explored[graph.Source] = true;
 
 		while(queue.Count > 0)
 		{
