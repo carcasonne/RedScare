@@ -10,7 +10,7 @@ public static class Alternate
 	{
 		var path = graph.BFS((g, e) => {
 			var fromRed = graph.Reds.Contains(graph.Vertices[e.From]);
-            var toRed	= graph.Reds.Contains(graph.Vertices[e.To]);
+			var toRed	= graph.Reds.Contains(graph.Vertices[e.To]);
 			return fromRed != toRed;
         });
 		return path.Count > 0;
