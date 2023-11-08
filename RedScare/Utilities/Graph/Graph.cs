@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
+
 
 namespace Utilities.Graphs;
 public class Graph
@@ -39,4 +41,49 @@ public class Graph
 
         return id;
     }
+
+
+  public int BreadthFirstSearchAvoidingRed() 
+  {
+    var queue = new Queue<Vertex>();
+    var explored = new bool[V];
+    var parent = new int[V];
+
+    for (int i = 0; i < V; i++)
+        parent[i] = -1;
+
+    queue.Enqueue(Vertices[Source]);
+    while(queue.Count > 0)
+    {
+        var vertex = queue.Dequeue();
+        foreach(var edge in vertex.Edges)
+        {
+            var neighbor = Vertices[edge.To];
+            var nIsRed = Reds.Contains(neighbor);
+
+            if (!explored[neighbor.Id] && !nIsRed)
+            {
+                explored[neighbor.Id] = true;
+                parent[neighbor.Id] = vertex.Id;
+                queue.Enqueue(neighbor);
+            }
+        }
+    }
+    if(parent[Target] == -1)
+    {
+        return -1;
+    }
+    var temp = parent[Target];
+    var pathLength = 1;
+
+    while (temp != Source)
+    {
+        pathLength++;
+        temp = parent[temp];
+    }
+
+    return pathLength;
+  }
+
+
 }

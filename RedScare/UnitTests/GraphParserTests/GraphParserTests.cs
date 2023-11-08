@@ -12,6 +12,7 @@ public class GraphParserTests
     [InlineData("common-1-20.txt", 20, 0, 9)]
     [InlineData("common-2-5757.txt", 5757, 163671, 2457)]
     [InlineData("gnm-5000-10000-1.txt", 5000, 10000, 2500)]
+    [InlineData("ski-illustration.txt", 36, 49, 1)]
     public void ParseGraph_Graph_Properties_Hold(string file, int expectedNodes, int expectedEdges, int expectedReds)
     {
         var graph = GraphParser.ParseGraph(file);
