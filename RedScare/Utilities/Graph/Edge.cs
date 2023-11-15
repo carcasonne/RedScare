@@ -10,8 +10,8 @@ public class Edge
     public int Id { get; set; }
     public int From { get; set; }
     public int To { get; set; }
-    // TODO: move weight to its own class?
-    public int? Weight { get; set; }
+
+    public int Weight { get; set; } = 0;
 
     // TODO: move flow shit to its own class?
     public int? Capacity { get; set; }

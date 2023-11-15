@@ -12,4 +12,5 @@ public enum GraphTypes
     Cyclic = 2,
     Acyclic = 3,
     FlowNetwork = 4,
+    Weighted = 5,
 }

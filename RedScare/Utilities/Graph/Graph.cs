@@ -10,6 +10,8 @@ namespace Utilities.Graphs;
 public class Graph
 {
     public List<Vertex> Vertices { get; set; } = new List<Vertex>();
+    // Having Reds as a list has turned out to make a lot of heavy Contains() operations
+    // Too lazy to change
     public List<Vertex> Reds { get; set; } = new List<Vertex>();
     public List<Edge> Edges { get; set; } = new List<Edge>();
     public ISet<GraphTypes> Properties { get; set; } = new HashSet<GraphTypes>();
@@ -22,7 +24,7 @@ public class Graph
     public int AddVertex(string name, bool isRed)
     {
         var id = V;
-        var vertex = new Vertex(id, name);
+        var vertex = new Vertex(id, name, isRed);
         Vertices.Add(vertex);
 
         if(isRed)

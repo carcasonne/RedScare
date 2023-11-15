@@ -29,8 +29,10 @@
 
   <ItemGroup>
     <None Remove="AlternateTests\" />
+    <None Remove="FewTests\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AlternateTests\" />
+    <Folder Include="FewTests\" />
   </ItemGroup>
 </Project>
