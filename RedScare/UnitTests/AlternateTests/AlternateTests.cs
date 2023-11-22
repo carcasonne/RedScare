@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using RedScare;
 using Utilities.GraphFactory;
 using Utilities.Graphs;
+using Utilities.Extensions;
 
 namespace UnitTests.AlternateTests;
 
@@ -86,6 +87,94 @@ public class AlternateTests
         var actual = Alternate.AlternatingPathExists(graph);
 
         Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void shit()
+    {
+        var directory = GetDataDirectory();
+        var files = Directory.GetFiles(directory).Single(x => x.Contains("ski-level3-3"));
+
+        var filepath = files.Split('/').Last();
+        var directedGraph = GraphParser.ParseGraph(filepath, true);
+        var tMany = Many.HowManyReds(directedGraph);
+        Assert.Equal(1, tMany);
+    }
+
+    [Fact]
+    public void TestEverything() 
+    {
+        var directory = GetDataDirectory();
+        var files = Directory.GetFiles(directory).Where(x => {
+            if (x.Contains("README.md"))
+                return false;
+            StreamReader sr = new StreamReader(x);
+            var firstLine = sr.ReadLine()!.Split(' ').Select(Int32.Parse).ToList();
+            int n = firstLine[0];
+            return n >= 500;
+        }).ToList();
+
+        files.Sort();
+
+        var n = files.Count;
+        // Name, no. vertices, alternate, few, many, none, some
+        var columnNames = new string[] {"Name", "Vertices", "A", "F", "M", "N", "S"};
+        var results = new string[n][];
+        for(int i = 0; i < n; i++)
+            results[i] = new string[columnNames.Length];
+
+        for(int i = 0; i < n; i++) 
+        {
+            var filepath = files[i].Split('/').Last();
+            var tName = filepath.Substring(0, filepath.Length - 4);
+            var graph = GraphParser.ParseGraph(filepath, false);
+            var tVertices = graph.V;
+            var tAlternate = Alternate.AlternatingPathExists(graph);
+            var tNone = None.ShortestPathWithoutReds(graph);
+            var tFew = Few.FewestNumberOfRed(graph);
+
+            if(tName.Contains("ski") || tName.Contains("increase"))
+            {
+                var directedGraph = GraphParser.ParseGraph(filepath, true);
+                var tMany = Many.HowManyReds(directedGraph);
+                results[i][4] = tMany == -999 ? "Not acyclic" : tMany.ToString();
+            }
+            else
+            {
+                results[i][4] = "Not directed";
+            }
+
+            //var tSome =
+            results[i][0] = tName;
+            results[i][1] = tVertices.ToString();
+            results[i][2] = tAlternate.ToString();
+            results[i][3] = tFew.ToString();
+            results[i][5] = (tNone == -1 ? false : true).ToString();
+
+        }
+
+        var table = results.ToLatexTable(columnNames);
+
+        using (var writer = new StreamWriter(@"/Users/sonne/Desktop/table.txt"))
+        {
+            writer.WriteLine(table);
+        }
+
+        Assert.True(true);
+    }
+
+    private static string GetDataDirectory()
+    {
+        var directory = Directory.GetCurrentDirectory();
+        // Necessary to do some fuckery due to multiple directories with the same name
+        var firstIndex = directory.IndexOf("RedScare");
+        while (directory.LastIndexOf("RedScare") != firstIndex)
+        {
+            var parent = Directory.GetParent(directory)!;
+            directory = parent.FullName;
+        }
+        var dataDirectory = $"{directory}/Data";
+        return dataDirectory;
     }
 
 }
