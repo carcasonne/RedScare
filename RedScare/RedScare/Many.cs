@@ -77,6 +77,7 @@ public static class Many
         return value;
     }
 
+    // Taken from: https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
     private static bool IsCyclic(Graph graph)
     {
         // Mark all the vertices as not visited and
@@ -93,6 +94,7 @@ public static class Many
         return false;
     }
 
+    // Taken from: https://www.geeksforgeeks.org/detect-cycle-in-a-graph/ 
     private static bool isCyclicUtil(Graph graph, int i, bool[] visited, bool[] recStack)
     {
         // Mark the current node as visited and
