@@ -9,6 +9,7 @@ using System.Collections;
 namespace Utilities.Graphs;
 public class Graph
 {
+    public string? GraphName { get; set; }
     public List<Vertex> Vertices { get; set; } = new List<Vertex>();
     // Having Reds as a list has turned out to make a lot of heavy Contains() operations
     // Too lazy to change

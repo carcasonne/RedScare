@@ -9,7 +9,7 @@ public static class None
     public static int ShortestPathWithoutReds(Graph graph)
     {
         var path = graph.BFS((g, e) => {
-            return !g.Reds.Contains(graph.Vertices[e.To]);
+            return !graph.Vertices[e.To].IsRed || graph.Target == e.To;
         });
         return path.Count > 0 ? path.Count : -1;
     }

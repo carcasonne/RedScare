@@ -24,6 +24,7 @@ public class GraphParser
         string t = secondLine[1];
 
         var graph = new Graph();
+        graph.GraphName = filename;
         var nameToId = new Dictionary<string, int>();
 
         var type = isDirected ? GraphTypes.Directed : GraphTypes.Undirected;

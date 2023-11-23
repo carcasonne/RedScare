@@ -31,7 +31,6 @@ public static class GraphExtensions
                         explored[neighbor.Id] = true;
                         parent[neighbor.Id] = vertex.Id;
                         queue.Enqueue(neighbor);
-
                     }
                 }
             }
