@@ -76,16 +76,16 @@ public class SystemTests
             var tFew = Few.FewestNumberOfRed(graph);
             watch.Stop();
             var fewTime = watch.Elapsed.TotalSeconds;
-
+            
             // Results
             results[i][0] = tName;
             results[i][1] = tVertices.ToString();
             results[i][2] = tAlternate.ToString();
             results[i][3] = tFew.ToString();
             var xd = (directed) ? tMany.ToString() : "Not A";
-            results[i][4] = -999 == tMany ? "Not Acyclic" : (-42 == tMany ? "Not Directed" : tMany.ToString());
+            results[i][4] = -42 == tMany ? "Not Directed and Acyclic" : tMany.ToString();
             results[i][5] = tNone.ToString();
-            results[i][6] = tSome.ToString();
+            results[i][6] = "Not Directed and Acyclic" == results[i][4] ? "Invalid" : tSome.ToString();
             // Times
             times[i][0] = tName;
             times[i][1] = tVertices.ToString();
