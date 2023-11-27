@@ -12,7 +12,8 @@ public static class Few
 		try
 		{
 			var path = rGraph.Dijkstra();
-			return path.Sum(x => x.Weight);
+			var sourceIsRed = graph.Vertices[graph.Source].IsRed ? 1 : 0;
+			return path.Sum(x => x.Weight) + sourceIsRed;
 		}
 		catch(Exception)
 		{
