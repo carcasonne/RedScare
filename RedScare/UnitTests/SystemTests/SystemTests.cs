@@ -42,9 +42,11 @@ public class SystemTests
         watch.Start();
         for (int i = 0; i < n; i++)
         {
+
             var filepath = files[i].Split('\\').Last();
             var tName = filepath.Substring(0, filepath.Length - 4);
-            var graph = GraphParser.ParseGraph(filepath, false);
+            var directed = tName.Contains("ski-level") || tName.Contains("increase");
+            var graph = GraphParser.ParseGraph(filepath, directed);
             var tVertices = graph.V;
 
             watch.Restart();
@@ -57,12 +59,7 @@ public class SystemTests
             watch.Stop();
             var noneTime = watch.Elapsed.TotalSeconds;
 
-            watch.Restart();
-            var tFew = Few.FewestNumberOfRed(graph);
-            watch.Stop();
-            var fewTime = watch.Elapsed.TotalSeconds;
-
-            var directedGraph = GraphParser.ParseGraph(filepath, true);
+            var directedGraph = directed ? graph : GraphParser.ParseGraph(filepath, true);
 
             watch.Restart();
             var tMany = Many.HowManyReds(directedGraph);
@@ -73,6 +70,12 @@ public class SystemTests
             var tSome = Some.SomePathWithReds(directedGraph);
             watch.Stop();
             var someTime = watch.Elapsed.TotalSeconds;
+
+            // Do few last, as it modifies the graph
+            watch.Restart();
+            var tFew = Few.FewestNumberOfRed(graph);
+            watch.Stop();
+            var fewTime = watch.Elapsed.TotalSeconds;
 
             // Results
             results[i][0] = tName;
@@ -95,11 +98,11 @@ public class SystemTests
         var resultTable = results.ToLatexTable(columnNames);
         var timesTable  = times.ToLatexTable(columnNames);
 
-        using (var writer = new StreamWriter(@"D:\Repos\skole\RedScare\RedScare\UnitTests\SystemTests\table_results.txt"))
+        using (var writer = new StreamWriter(@"/Users/sonne/Desktop/Uni stuff/Kandidat/1. Semester/Algorithm Design/RedScare/RedScare/UnitTests/SystemTests/table_results.txt"))
         {
             writer.WriteLine(resultTable);
         }
-        using (var writer = new StreamWriter(@"D:\Repos\skole\RedScare\RedScare\UnitTests\SystemTests\table_times.txt"))
+        using (var writer = new StreamWriter(@"/Users/sonne/Desktop/Uni stuff/Kandidat/1. Semester/Algorithm Design/RedScare/RedScare/UnitTests/SystemTests/table_results.txt"))
         {
             writer.WriteLine(timesTable);
         }
