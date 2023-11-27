@@ -36,7 +36,7 @@ public class AlternateTests
 
     public void Graph_Given_File_Properties_Hold(string filename, bool makeDirected, bool expected)
     {
-        var graph = GraphParser.ParseGraph(filename, makeDirected);
+        var graph = GraphParser.ParseGraph(filename);
         var actual = Alternate.AlternatingPathExists(graph);
         Assert.Equal(expected, actual);
     }
@@ -60,7 +60,7 @@ public class AlternateTests
     [InlineData("wall-n-10000.txt", false)]
     public void Graph_Flipping_Reds_And_Blacks_Same_Result(string filename, bool makeDirected)
     {
-        var graph = GraphParser.ParseGraph(filename, makeDirected);
+        var graph = GraphParser.ParseGraph(filename);
         var expected = Alternate.AlternatingPathExists(graph);
 
         // Flip
@@ -78,7 +78,7 @@ public class AlternateTests
     {
         var expected = false;
 
-        var graph = GraphParser.ParseGraph("P3.txt", false);
+        var graph = GraphParser.ParseGraph("P3.txt");
         graph.Reds = new List<Vertex>()
         {
             graph.Vertices[graph.Target]

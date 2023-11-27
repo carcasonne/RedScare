@@ -15,7 +15,7 @@ public class GraphParserTests
     [InlineData("ski-illustration.txt", 36, 49, 1)]
     public void ParseGraph_Directed_Graph_Properties_Hold(string file, int expectedNodes, int expectedEdges, int expectedReds)
     {
-        var graph = GraphParser.ParseGraph(file, true);
+        var graph = GraphParser.ParseGraph(file);
 
         var actualNodes = graph.V;
         var actualEdges = graph.E;
@@ -32,7 +32,7 @@ public class GraphParserTests
     {
         var expectedNeighbors = 0;
 
-        var graph = GraphParser.ParseGraph("common-1-20.txt", true);
+        var graph = GraphParser.ParseGraph("common-1-20.txt");
         var actualNeighbors = graph.Vertices.Sum(x => x.Edges.Count);
 
         Assert.Equal(expectedNeighbors, actualNeighbors);

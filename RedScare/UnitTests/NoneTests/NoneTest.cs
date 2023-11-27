@@ -11,7 +11,7 @@ public class NoneTests
     [InlineData("ski-illustration.txt", 8)]
     public void Graph_FileName_Finds_Correct_Path_Length(string filename, int expected)
     {
-        var graph = GraphParser.ParseGraph(filename, true);
+        var graph = GraphParser.ParseGraph(filename);
         var actual = None.ShortestPathWithoutReds(graph);
         Assert.Equal(expected, actual);
     }

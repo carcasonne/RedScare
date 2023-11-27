@@ -13,7 +13,7 @@ public class ManyTests
     [Fact]
     public void fdhjdfhjdsjfdsh()
     {
-        var graph = GraphParser.ParseGraph("common-1-2500.txt", false);
+        var graph = GraphParser.ParseGraph("common-1-2500.txt");
         var actual = None.ShortestPathWithoutReds(graph);
         Assert.Equal(6, actual);
     }
@@ -26,7 +26,7 @@ public class ManyTests
     [InlineData("ski-level20-3.txt", -1)]
     public void Many_Skilevel_Returns_Expected(string filename, int expected)
     {
-        var directedGraph = GraphParser.ParseGraph(filename, true);
+        var directedGraph = GraphParser.ParseGraph(filename);
         var actual = Many.HowManyReds(directedGraph);
         Assert.Equal(expected, actual);
     }
@@ -46,7 +46,7 @@ public class ManyTests
     public void Many_Skilevel_Without_Reds_Finds_0_Path(string filename)
     {
         var expected = 0;
-        var directedGraph = GraphParser.ParseGraph(filename, true);
+        var directedGraph = GraphParser.ParseGraph(filename);
 
         // Remove all vertices from Red set
         directedGraph.Reds = new List<Utilities.Graphs.Vertex>();
@@ -62,7 +62,7 @@ public class ManyTests
     [InlineData("ski-level3-3.txt", 6)]
     public void Many_Skilevel_Every_Node_Red_Finds_Correct_Max(string filename, int expected)
     {
-        var directedGraph = GraphParser.ParseGraph(filename, true);
+        var directedGraph = GraphParser.ParseGraph(filename);
 
         directedGraph.Reds = directedGraph.Vertices;
         foreach (var v in directedGraph.Vertices)
@@ -89,7 +89,7 @@ public class ManyTests
     public void Many_Cyclical_Graph_Returns_Nothing(string filename)
     {
         var expected = -999;
-        var directedGraph = GraphParser.ParseGraph(filename, true);
+        var directedGraph = GraphParser.ParseGraph(filename);
 
         // The idea is to make an edge target --> sink
         // Due to the structure of the ski level, this means that the graph becomes cyclical
