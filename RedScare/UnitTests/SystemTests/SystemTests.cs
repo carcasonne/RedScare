@@ -80,7 +80,8 @@ public class SystemTests
             results[i][1] = tVertices.ToString();
             results[i][2] = tAlternate.ToString();
             results[i][3] = tFew.ToString();
-            results[i][4] = tMany == -999 ? "Not acyclic" : tMany.ToString();
+            var xd = (directed) ? tMany.ToString() : "Not Directed or Acyclic";
+            results[i][4] = xd;
             results[i][5] = tNone.ToString();
             results[i][6] = tSome.ToString();
             // Times
@@ -96,11 +97,11 @@ public class SystemTests
         var resultTable = results.ToLatexTable(columnNames);
         var timesTable  = times.ToLatexTable(columnNames);
 
-        using (var writer = new StreamWriter(@"/Users/sonne/Desktop/Uni stuff/Kandidat/1. Semester/Algorithm Design/RedScare/RedScare/UnitTests/SystemTests/table_results.txt"))
+        using (var writer = new StreamWriter(@"C:\Users\Askou\Documents\AlgorithmDesign\RedScare\RedScare\UnitTests\SystemTests\table_results.txt"))
         {
             writer.WriteLine(resultTable);
         }
-        using (var writer = new StreamWriter(@"/Users/sonne/Desktop/Uni stuff/Kandidat/1. Semester/Algorithm Design/RedScare/RedScare/UnitTests/SystemTests/table_results.txt"))
+        using (var writer = new StreamWriter(@"C:\Users\Askou\Documents\AlgorithmDesign\RedScare\RedScare\UnitTests\SystemTests\times_table.txt"))
         {
             writer.WriteLine(timesTable);
         }
