@@ -12,6 +12,10 @@ public static class Many
 
     private static int Solve(Graph graph)
     {
+        if(graph.IsType(GraphTypes.Undirected))
+        {
+            return -42;
+        }
         // -1 as default value, since a state can have a valid best value of 0
         var optimals = new int[graph.V];
         for (int i = 0; i < graph.V; i++)

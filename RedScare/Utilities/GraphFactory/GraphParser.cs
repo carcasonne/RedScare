@@ -27,7 +27,7 @@ public class GraphParser
         graph.GraphName = filename;
         var nameToId = new Dictionary<string, int>();
 
-        var isDirected = false;
+        var isDirected = true;
 
         // Add all vertices
         for (int i = 0; i < n; i++)
@@ -54,7 +54,7 @@ public class GraphParser
             if(!thisIsDirected)
             {
                 graph.AddEdge(nameToId[to], nameToId[from]);
-                isDirected = true;
+                isDirected = false;
             }
         }
 

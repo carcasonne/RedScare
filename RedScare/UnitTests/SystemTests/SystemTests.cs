@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Utilities.Extensions;
 using Utilities.GraphFactory;
+using Utilities.Graphs;
 
 namespace UnitTests.SystemTests;
 public class SystemTests
@@ -45,8 +46,9 @@ public class SystemTests
 
             var filepath = files[i].Split('\\').Last();
             var tName = filepath.Substring(0, filepath.Length - 4);
-            var directed = tName.Contains("ski-level") || tName.Contains("increase");
             var graph = GraphParser.ParseGraph(filepath);
+            var directed = graph.IsType(GraphTypes.Directed);
+
             var tVertices = graph.V;
 
             watch.Restart();
@@ -80,8 +82,8 @@ public class SystemTests
             results[i][1] = tVertices.ToString();
             results[i][2] = tAlternate.ToString();
             results[i][3] = tFew.ToString();
-            var xd = (directed) ? tMany.ToString() : "Not Directed or Acyclic";
-            results[i][4] = xd;
+            var xd = (directed) ? tMany.ToString() : "Not A";
+            results[i][4] = -999 == tMany ? "Not Acyclic" : (-42 == tMany ? "Not Directed" : tMany.ToString());
             results[i][5] = tNone.ToString();
             results[i][6] = tSome.ToString();
             // Times
