@@ -10,7 +10,7 @@ using Utilities.Graphs;
 namespace Utilities.GraphFactory;
 public class GraphParser
 {
-    public static Graph ParseGraph(string filename, bool isDirected)
+    public static Graph ParseGraph(string filename)
     {
         var directory = GetDataDirectory();
 
@@ -27,8 +27,7 @@ public class GraphParser
         graph.GraphName = filename;
         var nameToId = new Dictionary<string, int>();
 
-        var type = isDirected ? GraphTypes.Directed : GraphTypes.Undirected;
-        graph.Properties.Add(type);
+        var isDirected = false;
 
         // Add all vertices
         for (int i = 0; i < n; i++)
@@ -50,8 +49,17 @@ public class GraphParser
             var line = sr.ReadLine()!.Split(' ').ToList();
             var from = line[0];
             var to = line[2];
+            var thisIsDirected = line[1] == "->";
             graph.AddEdge(nameToId[from], nameToId[to]);
+            if(!thisIsDirected)
+            {
+                graph.AddEdge(nameToId[to], nameToId[from]);
+                isDirected = true;
+            }
         }
+
+        var type = isDirected ? GraphTypes.Directed : GraphTypes.Undirected;
+        graph.Properties.Add(type);
 
         sr.Close();
         return graph;

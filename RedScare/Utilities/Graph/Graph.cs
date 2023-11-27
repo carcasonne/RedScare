@@ -40,15 +40,6 @@ public class Graph
         var edge = new Edge(id, from, to);
         Edges.Add(edge);
         Vertices[from].Edges.Add(edge);
-        
-        // IF undirected, allow traversel in the other direction
-        if(IsType(GraphTypes.Undirected))
-        {
-            var reverseEdge = new Edge(id + 1, to, from);
-            Edges.Add(reverseEdge);
-            Vertices[to].Edges.Add(reverseEdge);
-        }
-
         return id;
     }
 }

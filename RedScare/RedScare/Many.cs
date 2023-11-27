@@ -35,11 +35,6 @@ public static class Many
         {
             var edge = v.Edges[i];
             var neigh = g.Vertices[edge.To];
-            // Kinda cursed, kinda like it
-            //var lCount = neigh.Id == g.Target 
-            //           ? (neigh.IsRed ? 1 : 0) 
-            //           : OPT(neigh, g, optimals);
-
             int lCount = 0;
             // Don't want to continue the recursive call if at the target
             if(neigh.Id == g.Target)

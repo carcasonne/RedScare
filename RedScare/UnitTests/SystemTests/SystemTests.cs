@@ -46,7 +46,7 @@ public class SystemTests
             var filepath = files[i].Split('\\').Last();
             var tName = filepath.Substring(0, filepath.Length - 4);
             var directed = tName.Contains("ski-level") || tName.Contains("increase");
-            var graph = GraphParser.ParseGraph(filepath, directed);
+            var graph = GraphParser.ParseGraph(filepath);
             var tVertices = graph.V;
 
             watch.Restart();
@@ -59,15 +59,13 @@ public class SystemTests
             watch.Stop();
             var noneTime = watch.Elapsed.TotalSeconds;
 
-            var directedGraph = directed ? graph : GraphParser.ParseGraph(filepath, true);
-
             watch.Restart();
-            var tMany = Many.HowManyReds(directedGraph);
+            var tMany = Many.HowManyReds(graph);
             watch.Stop();
             var manyTime = watch.Elapsed.TotalSeconds;
 
             watch.Restart();
-            var tSome = Some.SomePathWithReds(directedGraph);
+            var tSome = Some.SomePathWithReds(graph);
             watch.Stop();
             var someTime = watch.Elapsed.TotalSeconds;
 
