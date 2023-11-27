@@ -8,7 +8,7 @@ public static class Many
 {
     // Assumes given graph is directed
     public static int HowManyReds(Graph graph) =>
-        Caller(graph) ? -999 : Solve(graph);
+        Solve(graph);
 
     private static int Solve(Graph graph)
     {
@@ -16,6 +16,13 @@ public static class Many
         {
             return -42;
         }
+        else
+        {
+            var isCyclic = Caller(graph);
+            if(isCyclic)
+                return -999;
+        }
+        
         // -1 as default value, since a state can have a valid best value of 0
         var optimals = new int[graph.V];
         for (int i = 0; i < graph.V; i++)
