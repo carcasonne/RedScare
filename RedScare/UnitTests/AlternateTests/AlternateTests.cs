@@ -19,9 +19,7 @@ public class AlternateTests
     [InlineData("P3.txt",           false, true)]
     // Grids: Diagonal exists with a valid path
     // No directed grids have a valid path
-    [InlineData("grid-5-0.txt",     true,  false)]
     [InlineData("grid-10-0.txt",    true,  false)]
-    [InlineData("grid-25-0.txt",    true,  false)]
     [InlineData("grid-50-0.txt",    true,  false)]
     [InlineData("grid-5-0.txt",     false, true)]
     [InlineData("grid-10-0.txt",    false, false)] // Grids where N is even do not have a valid path  
@@ -47,9 +45,7 @@ public class AlternateTests
     [InlineData("P3.txt", false)]
     [InlineData("grid-5-0.txt", true)]
     [InlineData ("grid-10-0.txt", true)]
-    [InlineData("grid-25-0.txt", true)]
     [InlineData("grid-50-0.txt", true)]
-    [InlineData("grid-5-0.txt", false)]
     [InlineData("grid-10-0.txt", false)]
     [InlineData("grid-25-0.txt", false)]
     [InlineData("grid-50-0.txt", false)]

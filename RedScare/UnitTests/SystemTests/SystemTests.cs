@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Utilities.Extensions;
 using Utilities.GraphFactory;
 using Utilities.Graphs;
+using System.IO;
 
 namespace UnitTests.SystemTests;
 public class SystemTests
@@ -99,11 +100,14 @@ public class SystemTests
         var resultTable = results.ToLatexTable(columnNames);
         var timesTable  = times.ToLatexTable(columnNames);
 
-        using (var writer = new StreamWriter(@"C:\Users\Askou\Documents\AlgorithmDesign\RedScare\RedScare\UnitTests\SystemTests\table_results.txt"))
+        var directoryInfo = new DirectoryInfo(directory);
+        var yep = directoryInfo.Parent.FullName;
+
+        using (var writer = new StreamWriter($"{yep}/results.txt"))
         {
             writer.WriteLine(resultTable);
         }
-        using (var writer = new StreamWriter(@"C:\Users\Askou\Documents\AlgorithmDesign\RedScare\RedScare\UnitTests\SystemTests\times_table.txt"))
+        using (var writer = new StreamWriter($"{yep}/time_table.txt"))
         {
             writer.WriteLine(timesTable);
         }
